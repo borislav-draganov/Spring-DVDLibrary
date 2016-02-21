@@ -1,10 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'com.wolffangx'
+group = 'com.draganov'
 version = '1.0-SNAPSHOT'
 
-description = "DVD.Library.Spring.Maven"
+description = "Spring-DVDLibrary"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,5 +22,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.30'
     compile group: 'com.jayway.restassured', name: 'rest-assured', version:'2.3.3'
     compile group: 'junit', name: 'junit', version:'4.10'
+    compile 'javax:javaee-api:7.0'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'org.hsqldb:hsqldb:2.3.3'
 }
