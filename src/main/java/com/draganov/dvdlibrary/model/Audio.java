@@ -10,14 +10,13 @@ import javax.persistence.*;
  * @author borislav.draganov
  */
 
-// @JsonIgnoreProperties - makes the Jackson JSON Processor ignore unknown fields instead of throwing an exception
 @Entity
-@Table(name = "AUDIO", schema = "PUBLIC")
+@Table(name = "AUDIO")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Audio {
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "NAME")

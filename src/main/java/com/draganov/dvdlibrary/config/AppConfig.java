@@ -22,7 +22,6 @@ import javax.sql.DataSource;
 
 @EnableWebMvc
 @Configuration
-//@ComponentScan(basePackages = "com.draganov.dvdlibrary.test")
 @ComponentScan(basePackages = "com.draganov.dvdlibrary")
 @EnableJpaRepositories("com.draganov.dvdlibrary.repository")
 @EnableTransactionManagement
@@ -52,13 +51,6 @@ public class AppConfig {
       return new PersistenceExceptionTranslationPostProcessor();
    }
 
-//   Properties additionalProperties() {
-//      Properties properties = new Properties();
-//      properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-//      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//      return properties;
-//   }
-   
    @Bean
    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
       LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -71,4 +63,11 @@ public class AppConfig {
 
       return em;
    }
+
+//   Properties additionalProperties() {
+//      Properties properties = new Properties();
+//      properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+//      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+//      return properties;
+//   }
 }
