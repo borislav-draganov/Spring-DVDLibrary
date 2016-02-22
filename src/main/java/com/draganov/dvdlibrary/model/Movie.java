@@ -2,6 +2,7 @@ package com.draganov.dvdlibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,12 +14,14 @@ import java.util.List;
  * @author borislav.draganov
  */
 
-// @XmlRootElement - makes the class serializable in XML and JSON
-// @JsonIgnoreProperties - makes the Jackson JSON Processor ignore unknown fields instead of throwing an exception
-@XmlRootElement
+@Entity
+@Table(name = "MOVIE")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
-    private int id;
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private int length;
     private String releaseDate;
@@ -43,11 +46,11 @@ public class Movie {
     }
 
     // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

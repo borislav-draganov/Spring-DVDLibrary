@@ -3,6 +3,7 @@ package com.draganov.dvdlibrary.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.draganov.dvdlibrary.model.util.LanguageAudioPair;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,13 +15,14 @@ import java.util.List;
  * @author borislav.draganov
  */
 
-// @XmlRootElement - makes the class serializable in XML and JSON
-// @JsonIgnoreProperties - makes the Jackson JSON Processor ignore unknown fields instead of throwing an exception
-@XmlRootElement
+@Entity
+@Table(name = "DVD")
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class DVD {
-    private int id;
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Movie movie;
     private String isbn;
     private String edition;
@@ -85,11 +87,11 @@ public class DVD {
         this.region = region;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

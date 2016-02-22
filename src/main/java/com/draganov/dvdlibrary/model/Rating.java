@@ -2,6 +2,7 @@ package com.draganov.dvdlibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -10,12 +11,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author borislav.draganov
  */
 
-// @XmlRootElement - makes the class serializable in XML and JSON
-// @JsonIgnoreProperties - makes the Jackson JSON Processor ignore unknown fields instead of throwing an exception
-@XmlRootElement
+@Entity
+@Table(name = "RATING")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Rating {
-    private int id;
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "NAME")
     private String name;
 
     public Rating() { }
@@ -25,11 +30,11 @@ public class Rating {
     }
 
     // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
