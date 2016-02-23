@@ -2,8 +2,12 @@ package com.draganov.dvdlibrary.model.util;
 
 import com.draganov.dvdlibrary.model.Audio;
 import com.draganov.dvdlibrary.model.Language;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
 /**
  * An utility class used for the Language and Audio pairs of a DVD
@@ -11,10 +15,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author borislav.draganov
  */
 
-// @XmlRootElement - makes the class serializable in XML and JSON
-@XmlRootElement
+//@Entity
+//@Table(name = "DVD_AUDIO_LANGUAGE")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LanguageAudioPair {
+    @JoinColumn(name = "AUDIO_ID")
     private Language language;
+
+    @JoinColumn(name = "LANGUAGE_ID")
     private Audio audio;
 
     public LanguageAudioPair() { }

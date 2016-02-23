@@ -17,7 +17,7 @@ import java.util.List;
  * @since 20/02/2016
  */
 @RestController
-@RequestMapping(path = "rating", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "ratings", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RatingController {
     @Autowired
     RatingService ratingService;

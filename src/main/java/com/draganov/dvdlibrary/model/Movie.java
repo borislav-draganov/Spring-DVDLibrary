@@ -1,6 +1,8 @@
 package com.draganov.dvdlibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
@@ -22,11 +24,27 @@ public class Movie {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "TITLE")
     private String title;
+
+    @Column(name = "LENGTH")
     private int length;
+
+    @Column(name = "REALEASEDATE")
     private String releaseDate;
-    private int imdbId;
+
+    @Column(name = "IMDB")
+    private String imdbId;
+
+    @JoinColumn(name = "RATING")
     private int rating;
+
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "MOVIE_GENRE",
+            joinColumns = @JoinColumn(name = "MOVIE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "GENRE_ID"))
     private List<Genre> genres;
 
     public Movie() { }
@@ -34,7 +52,7 @@ public class Movie {
     public Movie(String title,
                  int length,
                  String releaseDate,
-                 int imdbId,
+                 String imdbId,
                  int rating,
                  List<Genre> genres) {
         this.title = title;
@@ -78,11 +96,11 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public int getImdbId() {
+    public String getImdbId() {
         return imdbId;
     }
 
-    public void setImdbId(int imdbId) {
+    public void setImdbId(String imdbId) {
         this.imdbId = imdbId;
     }
 
@@ -94,10 +112,6 @@ public class Movie {
         this.rating = rating;
     }
 
-    // @XmLElementWrapper - generates a wrapper element around XML representation
-    // @XmlElement - sets the name of the model
-    @XmlElementWrapper(name = "genres")
-    @XmlElement(name = "genre")
     public List<Genre> getGenres() {
         return genres;
     }

@@ -23,12 +23,27 @@ public class DVD {
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "MOVIE")
     private Movie movie;
+
+    @Column(name = "ISBN")
     private String isbn;
+
+    @Column(name = "EDITION")
     private String edition;
+
+    @Column(name = "SCREEN_FORMAT")
     private String screenFormat;
+
+    @Column(name = "REGION")
     private String region;
-    private List<LanguageAudioPair> languageAudioPairs;
+
+//    @ManyToMany
+//    @JoinTable(name = "DVD_AUDIO_LANGUAGE",
+//            joinColumns = @JoinColumn(name = "DVD_ID"))
+//    private List<LanguageAudioPair> languageAudioPairs;
 
     public DVD() { }
 
@@ -43,7 +58,7 @@ public class DVD {
         this.edition = edition;
         this.screenFormat = screenFormat;
         this.region = region;
-        this.languageAudioPairs = languageAudioPairs;
+//        this.languageAudioPairs = languageAudioPairs;
     }
 
     // Getters and Setters
@@ -95,15 +110,11 @@ public class DVD {
         this.id = id;
     }
 
-    // @XmLElementWrapper - generates a wrapper element around XML representation
-	// @XmlElement - sets the name of the model
-    @XmlElementWrapper(name = "languageAudioPairs")
-    @XmlElement(name = "languageAudioPair")
-    public List<LanguageAudioPair> getLanguageAudioPairs() {
-        return languageAudioPairs;
-    }
-
-    public void setLanguageAudioPairs(List<LanguageAudioPair> languageAudioPairs) {
-        this.languageAudioPairs = languageAudioPairs;
-    }
+//    public List<LanguageAudioPair> getLanguageAudioPairs() {
+//        return languageAudioPairs;
+//    }
+//
+//    public void setLanguageAudioPairs(List<LanguageAudioPair> languageAudioPairs) {
+//        this.languageAudioPairs = languageAudioPairs;
+//    }
 }
