@@ -1,12 +1,10 @@
 package com.draganov.dvdlibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.draganov.dvdlibrary.model.util.LanguageAudioPair;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
@@ -25,7 +23,7 @@ public class DVD {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "MOVIE")
+    @JoinColumn(name = "MOVIE_ID")
     private Movie movie;
 
     @Column(name = "ISBN")
@@ -40,10 +38,19 @@ public class DVD {
     @Column(name = "REGION")
     private String region;
 
-//    @ManyToMany
-//    @JoinTable(name = "DVD_AUDIO_LANGUAGE",
-//            joinColumns = @JoinColumn(name = "DVD_ID"))
-//    private List<LanguageAudioPair> languageAudioPairs;
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "DVD_AUDIO",
+                joinColumns = @JoinColumn(name = "DVD_ID"),
+                inverseJoinColumns = @JoinColumn(name = "AUDIO_ID"))
+    private List<Audio> audios;
+
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "DVD_LANGUAGE",
+                joinColumns = @JoinColumn(name = "DVD_ID"),
+                inverseJoinColumns = @JoinColumn(name = "LANGUAGE_ID"))
+    private List<Language> languages;
 
     public DVD() { }
 
@@ -52,13 +59,15 @@ public class DVD {
                String edition,
                String screenFormat,
                String region,
-               List<LanguageAudioPair> languageAudioPairs) {
+               List<Audio> audios,
+               List<Language> languages) {
         this.movie = movie;
         this.isbn = ISBN;
         this.edition = edition;
         this.screenFormat = screenFormat;
         this.region = region;
-//        this.languageAudioPairs = languageAudioPairs;
+        this.audios = audios;
+        this.languages = languages;
     }
 
     // Getters and Setters
@@ -110,11 +119,19 @@ public class DVD {
         this.id = id;
     }
 
-//    public List<LanguageAudioPair> getLanguageAudioPairs() {
-//        return languageAudioPairs;
-//    }
-//
-//    public void setLanguageAudioPairs(List<LanguageAudioPair> languageAudioPairs) {
-//        this.languageAudioPairs = languageAudioPairs;
-//    }
+    public List<Audio> getAudios() {
+        return audios;
+    }
+
+    public void setAudios(List<Audio> audios) {
+        this.audios = audios;
+    }
+
+    public List<Language> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
 }
