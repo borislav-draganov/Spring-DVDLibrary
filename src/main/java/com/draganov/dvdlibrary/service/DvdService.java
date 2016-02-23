@@ -13,11 +13,11 @@ public interface DvdService {
 	
     DVD getById(Long id);
 	
-    DVD create(DVD DVD);
+    DVD create(DVD dvd);
 	
-    DVD update(DVD DVD);
+    DVD update(DVD dvd);
 	
-    void delete(DVD DVD);
+    void delete(DVD dvd);
 	
     void deleteById(Long id);
 }

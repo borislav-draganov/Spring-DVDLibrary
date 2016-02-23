@@ -13,11 +13,11 @@ public interface LanguageService {
 	
     Language getById(Long id);
 	
-    Language create(Language Language);
+    Language create(Language language);
 	
-    Language update(Language Language);
+    Language update(Language language);
 	
-    void delete(Language Language);
+    void delete(Language language);
 	
     void deleteById(Long id);
 }

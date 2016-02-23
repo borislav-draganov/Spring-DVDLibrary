@@ -26,30 +26,30 @@ public class RatingServiceImpl implements RatingService {
 		return ratingRepository.findOne(id);
 	}
 	
-    public Rating create(Rating audio) {
+    public Rating create(Rating rating) {
         // Ensure null ID to avoid update
-        audio.setId(null);
+        rating.setId(null);
 
-		return createOrUpdate(audio);
+		return createOrUpdate(rating);
 	}
 	
-    public Rating update(Rating audio) {
-		return createOrUpdate(audio);
+    public Rating update(Rating rating) {
+		return createOrUpdate(rating);
 	}
 	
-    public void delete(Rating audio) {
-		ratingRepository.delete(audio);
+    public void delete(Rating rating) {
+		ratingRepository.delete(rating);
 	}
 	
     public void deleteById(Long id) {
 		ratingRepository.delete(id);
 	}
 	
-	private Rating createOrUpdate(Rating audio) {
-		if (audio == null) {
+	private Rating createOrUpdate(Rating rating) {
+		if (rating == null) {
 			throw new DvdLibraryException("Invalid entity. Sent null.");
 		}
 		
-		return ratingRepository.save(audio);
+		return ratingRepository.save(rating);
 	}
 }

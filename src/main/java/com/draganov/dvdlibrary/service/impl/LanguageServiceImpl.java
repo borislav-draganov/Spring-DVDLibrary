@@ -26,30 +26,30 @@ public class LanguageServiceImpl implements LanguageService {
 		return languageRepository.findOne(id);
 	}
 	
-    public Language create(Language audio) {
+    public Language create(Language language) {
         // Ensure null ID to avoid update
-        audio.setId(null);
+        language.setId(null);
 
-		return createOrUpdate(audio);
+		return createOrUpdate(language);
 	}
 	
-    public Language update(Language audio) {
-		return createOrUpdate(audio);
+    public Language update(Language language) {
+		return createOrUpdate(language);
 	}
 	
-    public void delete(Language audio) {
-		languageRepository.delete(audio);
+    public void delete(Language language) {
+		languageRepository.delete(language);
 	}
 	
     public void deleteById(Long id) {
 		languageRepository.delete(id);
 	}
 	
-	private Language createOrUpdate(Language audio) {
-		if (audio == null) {
+	private Language createOrUpdate(Language language) {
+		if (language == null) {
 			throw new DvdLibraryException("Invalid entity. Sent null.");
 		}
 		
-		return languageRepository.save(audio);
+		return languageRepository.save(language);
 	}
 }

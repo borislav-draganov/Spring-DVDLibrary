@@ -13,11 +13,11 @@ public interface RatingService {
 	
     Rating getById(Long id);
 	
-    Rating create(Rating Rating);
+    Rating create(Rating rating);
 	
-    Rating update(Rating Rating);
+    Rating update(Rating rating);
 	
-    void delete(Rating Rating);
+    void delete(Rating rating);
 	
     void deleteById(Long id);
 }

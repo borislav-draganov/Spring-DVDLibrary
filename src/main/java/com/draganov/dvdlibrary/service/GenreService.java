@@ -13,11 +13,11 @@ public interface GenreService {
 	
     Genre getById(Long id);
 	
-    Genre create(Genre Genre);
+    Genre create(Genre genre);
 	
-    Genre update(Genre Genre);
+    Genre update(Genre genre);
 	
-    void delete(Genre Genre);
+    void delete(Genre genre);
 	
     void deleteById(Long id);
 }

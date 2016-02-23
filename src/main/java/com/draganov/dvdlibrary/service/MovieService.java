@@ -13,11 +13,11 @@ public interface MovieService {
 	
     Movie getById(Long id);
 	
-    Movie create(Movie Movie);
+    Movie create(Movie movie);
 	
-    Movie update(Movie Movie);
+    Movie update(Movie movie);
 	
-    void delete(Movie Movie);
+    void delete(Movie movie);
 	
     void deleteById(Long id);
 }

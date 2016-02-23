@@ -26,30 +26,30 @@ public class GenreServiceImpl implements GenreService {
 		return genreRepository.findOne(id);
 	}
 	
-    public Genre create(Genre audio) {
+    public Genre create(Genre genre) {
         // Ensure null ID to avoid update
-        audio.setId(null);
+        genre.setId(null);
 
-		return createOrUpdate(audio);
+		return createOrUpdate(genre);
 	}
 	
-    public Genre update(Genre audio) {
-		return createOrUpdate(audio);
+    public Genre update(Genre genre) {
+		return createOrUpdate(genre);
 	}
 	
-    public void delete(Genre audio) {
-		genreRepository.delete(audio);
+    public void delete(Genre genre) {
+		genreRepository.delete(genre);
 	}
 	
     public void deleteById(Long id) {
 		genreRepository.delete(id);
 	}
 	
-	private Genre createOrUpdate(Genre audio) {
-		if (audio == null) {
+	private Genre createOrUpdate(Genre genre) {
+		if (genre == null) {
 			throw new DvdLibraryException("Invalid entity. Sent null.");
 		}
 		
-		return genreRepository.save(audio);
+		return genreRepository.save(genre);
 	}
 }
