@@ -13,11 +13,11 @@ Note: I saw the ER diagram online and just followed it
 
 ## Tools ##
 * JDK 1.8
-* Maven 3
-* Spring 4 - Core,  JDBC, MVC
-* MySQL 5.6
-* Tomcat 8
-* REST-assured
+* Gradle 2.11
+* Spring 4 - Core, JDBC, MVC, 
+* Hibernate 5
+* HSQLDB 2.3.3
+* Tomcat 9
 
 ## Configuration ##
 * Enter the proper name and password for the database in the dataSource bean - src\main\webapp\WEB-INF\rest-servlet.xml
