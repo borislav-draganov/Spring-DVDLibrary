@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author Borislav
@@ -36,10 +39,31 @@ public class DvdController {
     public ResponseEntity<DVD> create(@Valid @RequestBody DVD dvd) {
         dvd = dvdService.create(dvd);
 
+        // process parallel
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.LOCATION, "dvds/" + dvd.getId());
 
+
         return new ResponseEntity<>(dvd, headers, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, path = "/bulk")
+    public ResponseEntity<List<DVD>> createBulk(@Valid @RequestBody List<DVD> dvds) throws InterruptedException {
+        List<DVD> result = Collections.synchronizedList(new ArrayList<>());
+
+        CountDownLatch latch = new CountDownLatch(dvds.size());
+
+        dvds.forEach((dvd) -> {
+            new Thread(() -> {
+                result.add(dvdService.create(dvd));
+                latch.countDown();
+            });
+        });
+
+        latch.await();
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(path = "{id}", method = RequestMethod.PUT)

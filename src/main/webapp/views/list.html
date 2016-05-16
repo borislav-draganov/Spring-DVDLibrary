@@ -1,0 +1,21 @@
+<div>
+	<div class="row">
+		<h1>{{ message }}</h1>
+	</div>
+
+	<div class="row">
+		<button class="btn btn-primary" ng-click="addItemToList()">New</button>
+	</div>
+
+	<div class="row list-group" ng-repeat="item in list">
+		<div class="list-group-item" ng-click="changeEditMode($index)">{{ item.name }}</div>
+		<div ng-show='showDetails($index)'>
+			<div ng-repeat="property in properties">
+				<input type="text" ng-model="item[property]"></input>
+			</div>
+			
+			<button class="btn btn-primary" ng-click="saveItem($index)">Save</button>
+			<button class="btn" ng-click="deleteItem($index)">Delete</button>
+		</div>
+	</div>
+</div>
